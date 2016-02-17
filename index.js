@@ -114,11 +114,11 @@ function count() {
   return parseInt(_command('git', ['rev-list', '--all', '--count']), 10);
 }
 
-var logFormat = '{"hash":"%H", "commiter":"%cN", "time":%ct000, "subject":"%s"}'
+var logFormat = '{"hash":"%H", "committer":"%cN", "committerEmail":"%cE", "time":%ct000, "subject":"%s"}'
 
 function log(length) {
   length = length || 10
-  var log = _command('git', ['log', '-'+length, '--pretty='+logFormat])
+  var log = _command('git', ['log', '-'+length, '--pretty=' + logFormat])
   var result = JSON.parse("[" + log.replace(/\n/g, ",") + "]")
   console.log(result instanceof Array)
   return result
