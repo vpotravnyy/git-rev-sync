@@ -22,4 +22,7 @@ result = git.count();
 assert.notEqual(result, 0, 'count() returns a non-zero number');
 assert.equal(Math.abs(result), result, 'count() returns a positive number');
 
+result = git.log();
+assert.equal(result instanceof Array, true, 'log() returns an array');
+
 console.log('tests passed');

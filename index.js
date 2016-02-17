@@ -114,8 +114,14 @@ function count() {
   return parseInt(_command('git', ['rev-list', '--all', '--count']), 10);
 }
 
-function log() {
-  throw new Error('not implemented');
+var logFormat = '{"hash":"%H", "commiter":"%cN", "time":%ct000, "subject":"%s"}'
+
+function log(length) {
+  length = length || 10
+  var log = _command('git', ['log', '-'+length, '--pretty='+logFormat])
+  var result = JSON.parse("[" + log.replace(/\n/g, ",") + "]")
+  console.log(result instanceof Array)
+  return result
 }
 
 module.exports = {
